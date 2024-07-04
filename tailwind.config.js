@@ -8,6 +8,11 @@ module.exports =  withMT({
   ],
   theme: {
     extend: {
+      screens: {
+        'sx': { "max": '550px'},
+        // => @media (min-width: 640px) { ... }
+      },
+
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

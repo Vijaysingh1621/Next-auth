@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { toast } from 'react-toastify'
+import { toast } from "react-toastify";
 
 import {
     Card,
@@ -23,32 +23,59 @@ const Register = () => {
         }
     },[sessionStatus,router]);
 
-    const  handleSubmit = async(e) =>{
-      e.preventDefault()
-      const username= e.target[0].value
-      const email = e.target[1].value  
-      const password = e.target[2].value
-      const confirmPassword = e.target[3].value
-    
+   
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const username = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+    const confirmPassword = e.target[3].value;
 
-    if(!username || !email || !password || !confirmPassword){
-      toast.error("Please fill all the input fields")
+    if (!username || !email || !password || !confirmPassword) {
+      toast.error("Please fill all the input fields");
       return;
-    }else if(password!==confirmPassword){
-      toast.error("Passwords do not match")
+    } else if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
       return;
     }
-  }
-    
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          confirmPassword,
+        }),
+      });
+
+      if (res.status === 400) {
+        toast.error("This email is already registered");
+      } else if (res.status === 201) {
+        router.push("/login");
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+  };
   
+if(sessionStatus=="loading"){
+  return<h1>Loading...</h1>
+}
 
 
 
     return (
     sessionStatus!=="authenticated" && (
+      <div className="h-screen  bg-gray-900">
     <div className='flex justify-center items-center '>
-    <Card color="transparent" shadow={false} className='mt-11  pt-4 pl-8 pr-8'>
-      <Typography variant="h4" color="blue-gray">
+    <Card color="transparent" shadow={false} className='mt-11  pt-4 pl-8 pr-8 sx:mt-[140px]  bg-gray-100  sx:flex sx:justify-center sx:items-center sx:pt-4 sx:pl-2 sx:pr-2 sx:pb-4'>
+      <Typography variant="h4" color="blue-gray" className='sx:mr-[200px]'>
         Register 
       </Typography>
       <Typography color="gray" className="mt-1 font-normal">
@@ -123,9 +150,9 @@ const Register = () => {
       </form>
     </Card>
     </div>
-    
+    </div>
   )
 )
 }
 
-export default Register
+export default Register;
