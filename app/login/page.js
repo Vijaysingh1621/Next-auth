@@ -46,6 +46,7 @@ const Login=()=>{
           toast.error("Invalid Credientals");
         } else {
           toast.success("Successfully Logged In.");
+          router.push("/dashboard")
         }
       };
     

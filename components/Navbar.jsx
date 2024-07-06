@@ -16,7 +16,7 @@ const Navbar = ()=>{
                         Home</Link>
                     </li>
                     <li className="mx-4 mt-5 ">
-                        <Link href="/dashboard" className="text-white font-bold sx:rounded-lg sx:bg-gray-800 p-2 active:bg-gray-900">
+                        <Link href="/dashboard"  className="text-white font-bold sx:rounded-lg sx:bg-gray-800 p-2 active:bg-gray-900">
                         Dashboard</Link>
                     </li>
                 </div>

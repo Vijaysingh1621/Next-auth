@@ -58,6 +58,7 @@ const Register = () => {
         toast.error("This email is already registered");
       } else if (res.status === 201) {
         router.push("/login");
+        toast.success("Account created successfully!")
       }
     } catch (error) {
       toast.error(error);
