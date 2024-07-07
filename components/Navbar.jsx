@@ -4,6 +4,7 @@ import { signOut, useSession } from "next-auth/react"
 import { Button } from "@material-tailwind/react"
 
 const Navbar = ()=>{
+
     const {data:session }=useSession()
 
     return(
@@ -28,7 +29,7 @@ const Navbar = ()=>{
                     </li>
 
                     <li className="mx-4 mb-[2rem] sx:mt-5">
-                        <Link href="/register" className="text-white font-bold sx:rounded-lg sx:bg-gray-800 p-2 active:bg-gray-900">
+                        <Link href="/Register" className="text-white font-bold sx:rounded-lg sx:bg-gray-800 p-2 active:bg-gray-900">
                         Register</Link>
                     </li>
                     </>):( 

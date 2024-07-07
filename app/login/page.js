@@ -102,7 +102,7 @@ const Login=()=>{
                 </Button>
                 <Typography color="gray" className="mt-4 text-center font-normal">
                   Don't have an account?{" "}
-                  <Link href="/register" className="font-medium text-gray-900">
+                  <Link href="/Register" className="font-medium text-gray-900">
                     Register
                   </Link>
                 </Typography>
