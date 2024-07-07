@@ -40,7 +40,7 @@ const Register = () => {
       }
     
       try {
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/registerapi`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/api/registerapi`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
