@@ -39,9 +39,6 @@ const Navbar = ()=>{
                        <Button className="bg-red-900 p-2 px-5 mb-[2rem]" onClick={()=>signOut()} >Log Out</Button>
                        </li>
                     </div>)}
-                    <>
-                   
-                    </>
                 </div>
             </ul>
         </div>
