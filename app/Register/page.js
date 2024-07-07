@@ -24,46 +24,50 @@ const Register = () => {
     },[sessionStatus,router]);
 
    
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const username = e.target[0].value;
-    const email = e.target[1].value;
-    const password = e.target[2].value;
-    const confirmPassword = e.target[3].value;
-
-    if (!username || !email || !password || !confirmPassword) {
-      toast.error("Please fill all the input fields");
-      return;
-    } else if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
-
-    try {
-      const res = await fetch("/api/registerapi", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-          confirmPassword,
-        }),
-      });
-
-      if (res.status === 400) {
-        toast.error("This email is already registered");
-      } else if (res.status === 201) {
-        router.push("/login");
-        toast.success("Account created successfully!")
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const username = e.target[0].value;
+      const email = e.target[1].value;
+      const password = e.target[2].value;
+      const confirmPassword = e.target[3].value;
+    
+      if (!username || !email || !password || !confirmPassword) {
+        toast.error("Please fill all the input fields");
+        return;
+      } else if (password !== confirmPassword) {
+        toast.error("Passwords do not match");
+        return;
       }
-    } catch (error) {
-      toast.error(error);
-    }
-  };
+    
+      try {
+        const res = await fetch("/api/registerapi", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+            confirmPassword,
+          }),
+        });
+    
+        if (!res.ok) {
+          const errorData = await res.json();
+          toast.error(errorData.error || "Something went wrong!");
+        }
+        if (res.status === 400) {
+          toast.error("This email is already registered");}
+         else if (res.status === 201) {
+          router.push("/login");
+          toast.success("Account created successfully!");
+        }
+      } catch (error) {
+        toast.error("An error occurred while creating the account. Please try again.");
+        console.error("Error:", error);
+      }
+    };
   
 if(sessionStatus=="loading"){
   return<h1>Loading...</h1>
