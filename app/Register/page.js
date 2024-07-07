@@ -40,7 +40,8 @@ const Register = () => {
       }
     
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/api/registerapi`, {
+        const baseURL = window.location.origin;
+        const res = await fetch(`${baseURL}/api/registerapi`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
