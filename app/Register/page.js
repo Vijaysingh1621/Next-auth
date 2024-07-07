@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { toast } from "react-toastify";
-import { useUrl } from 'next-url';
 
 import {
     Card,
@@ -40,12 +39,9 @@ const Register = () => {
         return;
       }
 
-            
-      const url = useUrl();
-      const registerUrl = new URL("/api/registerapi", url.origin);
-    
       try {
-        const res = await fetch(registerUrl, {
+        const url = new URL("/api/registerapi", window.location.origin);
+        const res = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
